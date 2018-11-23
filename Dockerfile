@@ -40,21 +40,6 @@ RUN echo 'https://mirrors.aliyun.com/alpine/v3.4/main/' > /etc/apk/repositories 
     $PHPIZE_DEPS \
     linux-headers \
     python pcre-dev libtool\
-    # install pecl extensions (redis imagick xdebug imagick)
-    && pecl install igbinary imagick redis xdebug \
-    && docker-php-ext-enable igbinary redis xdebug imagick \
-    && docker-php-source extract \
-    && docker-php-ext-configure gd --with-freetype-dir=/usr/lib --with-jpeg-dir=/usr/lib --with-png-dir=/usr/lib --with-vpx-dir=/usr/lib \
-    && docker-php-ext-configure imap --with-imap --with-imap-ssl \
-    && docker-php-ext-configure exif --with-libdir=/usr/lib \
-    && docker-php-ext-configure mysqli --with-mysqli=mysqlnd \
-    && docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd \
-    && docker-php-ext-configure zip --with-libdir=/usr/lib \
-    && docker-php-ext-install  bz2 zip exif bcmath sysvsem pcntl sockets pdo pdo_mysql mysqli intl readline soap xsl xmlrpc gettext imap iconv \
-    && docker-php-source delete \
-    && apk del .build-deps \
-    && rm -rf /var/cache/apk/* \
-    && rm -rf /tmp/* \
     # install composer
     && curl -sS https://getcomposer.org/installer | php -- \
         --filename=composer.phar \
