@@ -1,13 +1,14 @@
 FROM php:7.1-fpm-alpine3.4
 
-MAINTAINER thanatos <thanatos915@163.com>
+MAINTAINER swz <yan521zheng@163.com>
 
 WORKDIR /tmp
 
 ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
 ENV COMPOSER_ALLOW_SUPERUSER=1
 RUN apk add --no-cache --repository http://dl-3.alpinelinux.org/alpine/edge/testing gnu-libiconv
-RUN apk add build-base
+RUN yum install -y wget gcc gcc-c++ make openssl-devel
+RUN useradd -s /sbin/nologin -M www
 
 RUN echo 'https://mirrors.aliyun.com/alpine/v3.4/main/' > /etc/apk/repositories \
     && echo 'https://mirrors.aliyun.com/alpine/v3.4/community/' >> /etc/apk/repositories \
