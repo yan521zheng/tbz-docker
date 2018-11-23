@@ -7,8 +7,6 @@ WORKDIR /tmp
 ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
 ENV COMPOSER_ALLOW_SUPERUSER=1
 RUN apk add --no-cache --repository http://dl-3.alpinelinux.org/alpine/edge/testing gnu-libiconv
-RUN yum install -y wget gcc gcc-c++ make openssl-devel
-RUN useradd -s /sbin/nologin -M www
 
 RUN echo 'https://mirrors.aliyun.com/alpine/v3.4/main/' > /etc/apk/repositories \
     && echo 'https://mirrors.aliyun.com/alpine/v3.4/community/' >> /etc/apk/repositories \
@@ -18,6 +16,7 @@ RUN echo 'https://mirrors.aliyun.com/alpine/v3.4/main/' > /etc/apk/repositories 
     bash \
     git \
     bzip2-dev \
+    build-base\
     gettext-dev \
     imap-dev \
     libaio-dev \
